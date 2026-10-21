@@ -1,0 +1,52 @@
+<?php
+require_once __DIR__. '../model/usuario.php';
+
+class UsuarioController{
+
+
+    private $usuarioModel;
+    public function __construct() {
+        $this->usuarioModel = new Usuario();
+    }
+    public function index(){
+      
+        if(isset($_SESSION['id'])) {
+
+            header("Location: index.php?action=painel");
+
+            exit;
+        }
+
+        include __DIR__ . "/../view/login.php";
+
+
+    }
+
+public function autenticar(){
+    if(!isset($_POST['email'] , $_POST['senha'])){
+
+        header("Location: index.php"); 
+        exit;
+
+
+    }
+
+    $email = trim($_POST['email']);
+    $senha = trim($_POST['senha']);
+    if(empty($email) || empty($senha)){
+        $erro="preencha seu email e senha";
+        include __DIR__ . "/../view/login.php";
+
+
+    }
+}
+
+}
+
+
+
+
+
+
+
+?>
